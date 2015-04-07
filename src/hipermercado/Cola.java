@@ -10,4 +10,5 @@ package hipermercado;
  */
 public class Cola {
     
+    private String laura = "es mu sersi";
 }
