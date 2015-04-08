@@ -42,6 +42,8 @@ public class Cola {
 
         Cliente cl = porElPrincipio.cl;
         porElPrincipio = porElPrincipio.siguiente;
+        
+        System.out.println("COLA: se saca un cliente.");
         return cl;
     }
 
@@ -64,6 +66,8 @@ public class Cola {
 
         tamaño++;
         modificaElTamañoMaximo();
+        
+        System.out.println("COLA: se ha añadido un cliente.");
     }
 
     public synchronized void añadirPrincipio(Cliente cl) {

@@ -9,6 +9,7 @@ public class Contabilidad {
     }
     
     public synchronized void añadeSaldo(double saldo){
+        System.out.println("CONTABILIDAD:se añade un saldo.");
         this.saldo += saldo;
     }
     

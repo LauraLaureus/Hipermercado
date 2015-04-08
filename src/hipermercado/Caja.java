@@ -23,7 +23,12 @@ public class Caja extends Thread {
             while(cliente != null){
                 double recaudacionParcial = cliente.damePrecioCarro();
                 this.recaudacion += recaudacionParcial;
+                
+                System.out.println("CAJA: se va a atender a un cliente");
                 Thread.sleep((long)recaudacionParcial/10);
+                System.out.println("CAJA: se ha atendido a un cliente");
+                
+                cliente = cola.sacar();
             }
             
         }
