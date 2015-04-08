@@ -29,7 +29,7 @@ public class Cola {
         if (tamaño == 0) {
             if (abierto) {
                 try {
-                    Thread.sleep((long) 10000);
+                    this.wait((long) 10000);
                     if (tamaño == 0) {
                         return null;
                     }
@@ -48,7 +48,7 @@ public class Cola {
     }
 
     public synchronized void añadirFinal(Cliente cl) {
-
+        notifyAll(); //o notify solamente
         if (!abierto) {
             return;
         }
