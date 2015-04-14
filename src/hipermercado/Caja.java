@@ -15,6 +15,7 @@ public class Caja extends Thread {
     public void run(){
     
         try{
+            
             Cliente cliente = cola.sacar();
             while(cliente != null){
                 double recaudacionParcial = cliente.damePrecioCarro();

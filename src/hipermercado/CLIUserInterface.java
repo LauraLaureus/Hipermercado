@@ -15,5 +15,17 @@ public class CLIUserInterface implements UserInterface{
         
         return respuesta;
     }
+
+    @Override
+    public int preguntaNumClientes() {
+        
+        Scanner teclado = new Scanner(System.in);
+        
+        int respuesta;
+        System.out.println("¿Cuántas clases pasaron durante el día?");
+        respuesta = teclado.nextInt();
+        
+        return respuesta;
+    }
     
 }

@@ -48,7 +48,7 @@ public class Cola {
     }
 
     public synchronized void añadirFinal(Cliente cl) {
-        notifyAll(); //o notify solamente
+        notifyAll(); //o notify solamente camiar de sitio????
         if (!abierto) {
             return;
         }
