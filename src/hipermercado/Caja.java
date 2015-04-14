@@ -1,7 +1,7 @@
 
 package hipermercado;
 
-public class Caja extends Thread {
+public class Caja extends Thread implements StatusVisible{
     
     private final Cola cola;
     private final Contabilidad cajaFuerte;
@@ -21,13 +21,15 @@ public class Caja extends Thread {
                 double recaudacionParcial = cliente.damePrecioCarro();
                 this.recaudacion += recaudacionParcial;
                 
-                System.out.println("CAJA: se va a atender a un cliente");
+                System.out.println("CAJA" + this.getId() + ": se va a atender al "
+                        + " cliente " + cliente.dameNombre());
                 Thread.sleep((long)recaudacionParcial/10);
-                System.out.println("CAJA: se ha atendido a un cliente");
+                System.out.println("CAJA" + this.getId() + ": se ha atendido a "
+                +   cliente.dameNombre());
                 
                 cliente = cola.sacar();
             }
-            
+            System.out.println("CAJA" + this.getId() + " no tengo más clientes.");
         }
         catch(Exception e){
          //Me han interrumpido y.y
@@ -38,7 +40,12 @@ public class Caja extends Thread {
     }
 
     private void pasarLaContabilidad() {
-        cajaFuerte.añadeSaldo(recaudacion);
+        cajaFuerte.añadeSaldo(recaudacion,  this.getId());
+    }
+
+    @Override
+    public void showStatus() {
+        System.out.println("Recaudacion actual: " + recaudacion);
     }
 
         
