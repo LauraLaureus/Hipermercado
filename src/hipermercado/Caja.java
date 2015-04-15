@@ -31,8 +31,8 @@ public class Caja extends Thread implements StatusVisible{
             }
             System.out.println("CAJA" + this.getId() + " no tengo más clientes.");
         }
-        catch(Exception e){
-         //Me han interrumpido y.y
+        catch(InterruptedException e){
+            
         }
         finally{
             pasarLaContabilidad();

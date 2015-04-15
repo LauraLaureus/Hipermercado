@@ -1,8 +1,6 @@
 package hipermercado;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ManejadorDeCajas extends Thread implements StatusVisible {
 
@@ -29,7 +27,7 @@ public class ManejadorDeCajas extends Thread implements StatusVisible {
         for (Caja caja : hipermercado) {
             caja.start();
         }
-        for (Caja hipermercado1 : hipermercado) {
+        for (Caja caja : hipermercado) {
             try {
                 this.join();
             } catch (InterruptedException ex) {
@@ -46,8 +44,8 @@ public class ManejadorDeCajas extends Thread implements StatusVisible {
     
     @Override
     public void interrupt(){
-        for (Caja hipermercado1 : hipermercado) {
-            hipermercado1.interrupt();
+        for (Caja caja : hipermercado) {
+            caja.interrupt();
         }
         super.interrupt();
     }
@@ -78,4 +76,5 @@ public class ManejadorDeCajas extends Thread implements StatusVisible {
     public void showStatus() {
         System.out.println("Numero de cajas creadas:" + numCajas);
     }
+    
 }

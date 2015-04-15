@@ -20,7 +20,6 @@ public class Contabilidad implements StatusVisible{
         numCajas--;
         if(numCajas == 0){
             cola.cerrar();
-            jefe.interrupt();
             System.out.println("CONTABILIDAD: Se han cerrado todas las cajas.");
             System.out.println("CONTABILIDAD: se espera que el hilo principal termine.");
         }

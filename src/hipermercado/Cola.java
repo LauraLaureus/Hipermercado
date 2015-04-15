@@ -1,6 +1,5 @@
 package hipermercado;
 
-
 public class Cola implements StatusVisible {
 
     private boolean abierto;
@@ -36,21 +35,24 @@ public class Cola implements StatusVisible {
         if (tamaño == 0) {
             if (abierto) {
                 try {
-                      this.wait((long) 10000);
+                    this.wait((long) 10000);
                     if (tamaño == 0) {
                         return null;
                     }
                 } catch (InterruptedException ex) {
                 }
-            }else{
+            } else {
                 return null;
             }
         }
 
-        Cliente cl = porElPrincipio.cl;
-        porElPrincipio = porElPrincipio.siguiente;
-        tamaño--;
-        
+        Cliente cl = null;
+        if (porElPrincipio.cl != null) {
+            cl = porElPrincipio.cl;
+            porElPrincipio = porElPrincipio.siguiente;
+            tamaño--;
+        }
+
         System.out.println("COLA: se saca un cliente.");
         return cl;
     }
@@ -74,7 +76,7 @@ public class Cola implements StatusVisible {
 
         tamaño++;
         modificaElTamañoMaximo();
-        
+
         System.out.println("COLA: se ha añadido un cliente.");
     }
 
