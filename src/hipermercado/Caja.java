@@ -1,33 +1,47 @@
 
 package hipermercado;
 
-public class Caja extends Thread implements StatusVisible{
+public class Caja extends Thread {
     
-    private final Cola cola;
+    private static int semilla = 0;
+    private final Cola fila;
     private final Contabilidad cajaFuerte;
     private double recaudacion;
+    private final int id;
     
     public Caja(Cola cola, Contabilidad cajaFuerte) {
-        this.cola = cola;
+        this.fila = cola;
         this.cajaFuerte = cajaFuerte;
+        this.id = semilla;
+        incrementaSemilla();
     }
     
+    public synchronized static void incrementaSemilla(){
+        semilla++;
+    }
+    
+    @Override
+    public long getId(){
+        return this.id;
+    }
+    
+    @Override
     public void run(){
     
         try{
             
-            Cliente cliente = cola.sacar();
+            Cliente cliente = fila.sacar();
             while(cliente != null){
                 double recaudacionParcial = cliente.damePrecioCarro();
                 this.recaudacion += recaudacionParcial;
                 
                 System.out.println("CAJA" + this.getId() + ": se va a atender al "
-                        + " cliente " + cliente.dameNombre());
-                Thread.sleep((long)recaudacionParcial/10);
+                        + " cliente " + cliente.dameNombre() + Main.Momento.esteMomento());
+                Thread.sleep((long)recaudacionParcial/10*1000);
                 System.out.println("CAJA" + this.getId() + ": se ha atendido a "
-                +   cliente.dameNombre());
+                +   cliente.dameNombre() + Main.Momento.esteMomento());
                 
-                cliente = cola.sacar();
+                cliente = fila.sacar();
             }
             System.out.println("CAJA" + this.getId() + " no tengo más clientes.");
         }
@@ -43,7 +57,6 @@ public class Caja extends Thread implements StatusVisible{
         cajaFuerte.añadeSaldo(recaudacion,  this.getId());
     }
 
-    @Override
     public void showStatus() {
         System.out.println("Recaudacion actual: " + recaudacion);
     }
